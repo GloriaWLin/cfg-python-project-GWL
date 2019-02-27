@@ -10,6 +10,11 @@ def say_hello():
   # return "hello world!"
   return render_template("index.html") # update
 
+@app.route("/<name>") 
+def say_hello_to(name):
+  # return "hello world!"
+  return f"Hello {name} :)"
+
 app.run(debug=True) 
 # starts up a web server controllable by Flask
 # debug=True - automatically restart the program each time we made changes to our Python code
