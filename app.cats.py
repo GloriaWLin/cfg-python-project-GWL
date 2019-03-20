@@ -1,9 +1,13 @@
 import requests
-
+import os
 from flask import Flask, render_template, request
+from dotenv import load_dotenv
 
 app = Flask(__name__)
-key = 'd6d3df10-5689-454d-9c97-a356f5bf3a6d'
+# key = 'd6d3df10-5689-454d-9c97-a356f5bf3a6d'
+load_dotenv()
+key = os.getenv('API_KEY')
+sub_id = os.getenv('SUB_ID')
 
 @app.route('/')
 def index():
@@ -26,7 +30,7 @@ def add_favourite():
         headers={'x-api-key': key},
         json={
             'image_id': image_id,
-            'sub_id': 'x1be4a'
+            'sub_id': sub_id
         }
     )
     data = response.json()
