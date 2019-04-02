@@ -118,10 +118,10 @@ def today():
     return result
 
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
 #     app.run('0.0.0.0', port=3000,debug=True)
 
-if 'PORT' in os.environ:
-     app.run(host='0.0.0.0', port=int(os.environ['PORT']))
-else:
-     app.run(debug=True)
+    if 'PORT' in os.environ:
+        app.run(host='0.0.0.0', port=int(os.environ['PORT']))
+    else:
+        app.run(debug=True)
