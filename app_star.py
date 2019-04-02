@@ -26,7 +26,7 @@ def extract_date():
 
 
 # -------- Home page -------- #
-@app.route('/home')
+@app.route('/')
 def index():
     return render_template(index_html)
 
