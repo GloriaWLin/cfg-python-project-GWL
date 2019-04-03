@@ -83,7 +83,10 @@ def response():
 def today():
     # retrieve the current date
     now = datetime.datetime.now()
-    today_date = '{}-{}-{}'.format(now.year,now.month,now.day)
+    if now.hour > 12:
+        today_date = '{}-{}-{}'.format(now.year,now.month,now.day)
+    else:
+        today_date = '{}-{}-{}'.format(now.year,now.month,now.day - 1)
     payload_apod = {
         'date': today_date,
         'hd': True,
