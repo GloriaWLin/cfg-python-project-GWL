@@ -28,7 +28,9 @@ def extract_date():
 # -------- Home page -------- #
 @app.route('/')
 def index():
-    return render_template(index_html)
+    # request root url of the page - for home button
+    root_url = request.url_root
+    return render_template(index_html, root_url = root_url)
 
 
 # -------- Response page -------- #
@@ -51,11 +53,14 @@ def response():
         title = response['title']
         url = response['url']
         hdurl = response['hdurl']
+        # request root url of the page - for home button
+        root_url = request.url_root
         if 'copyright' in response.keys(): 
             # for the cases when 'copyright' info is given
             copy_right = response['copyright']
             result = render_template(
                 story_html,
+                root_url = root_url,
                 pic_title = title,
                 date = date,
                 description = explanation,
@@ -66,6 +71,7 @@ def response():
             # sometimes there is no 'copyright' info
             result = render_template(
                 story_html,
+                root_url = root_url,
                 pic_title = title,
                 date = date,
                 description = explanation,
@@ -100,10 +106,13 @@ def today():
     title = response['title']
     url = response['url']
     hdurl = response['hdurl']
+    # request root url of the page - for home button
+    root_url = request.url_root
     if 'copyright' in response.keys():
         copy_right = response['copyright']
         result = render_template(
             story_html,
+            root_url = root_url,
             pic_title = title,
             date = date,
             description = explanation,
@@ -113,6 +122,7 @@ def today():
     else:
         result = render_template(
             story_html,
+            root_url = root_url,
             pic_title = title,
             date = date,
             description = explanation,
