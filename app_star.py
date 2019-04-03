@@ -4,7 +4,7 @@ from flask import Flask, render_template, request
 from dotenv import load_dotenv
 import datetime
 
-app = Flask(__name__)
+app_star = Flask(__name__)
 load_dotenv()
 
 key = os.getenv('API_KEY_NASA') # API key stored in .env
@@ -26,7 +26,7 @@ def extract_date():
 
 
 # -------- Home page -------- #
-@app.route('/')
+@app_star.route('/')
 def index():
     # request root url of the page - for home button
     root_url = request.url_root
@@ -34,7 +34,7 @@ def index():
 
 
 # -------- Response page -------- #
-@app.route('/response', methods=['POST', 'GET'])
+@app_star.route('/response', methods=['POST', 'GET'])
 def response():
     if request.method == 'POST':
         # compile user input into a date string
@@ -85,13 +85,13 @@ def response():
 # -------- Today page -------- #
 # - Use the same template as the Response page
 # - Queries automatically sent using the current date
-@app.route('/today')
+@app_star.route('/today')
 def today():
     # retrieve the current date
     now = datetime.datetime.now()
-    if now.hour > 12:
+    if now.hour > 12: # only update the date after 12pm
         today_date = '{}-{}-{}'.format(now.year,now.month,now.day)
-    else:
+    else: # otherwise use the story from the previous day
         today_date = '{}-{}-{}'.format(now.year,now.month,now.day - 1)
     payload_apod = {
         'date': today_date,
@@ -132,9 +132,9 @@ def today():
 
 
 if __name__ == '__main__':
-#     app.run('0.0.0.0', port=3000,debug=True)
+#     app_star.run('0.0.0.0', port=3000,debug=True)
 
     if 'PORT' in os.environ:
-        app.run(host='0.0.0.0', port=int(os.environ['PORT']))
+        app_star.run(host='0.0.0.0', port=int(os.environ['PORT']))
     else:
-        app.run(debug=True)
+        app_star.run(debug=True)
