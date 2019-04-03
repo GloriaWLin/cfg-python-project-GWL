@@ -1,1 +1,2 @@
-web gunicorn app_star:app_star
+web: python app_star.py
+heroku ps:scale web=1
